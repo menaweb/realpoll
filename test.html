@@ -18,7 +18,6 @@
 		var socket = io.connect('http://localhost:8080');
 		socket.on('question', function(data){
 			$('#title').text(data.title);
-			console.log(data);
 			for(var i in data.options){
 				$('#buttons').append('<div class="control-group"><button type="submit" class="btn input-xxlarge" value="'
 						+ i + '">'
