@@ -14,8 +14,8 @@
 	<!-- node -->
 	<script src="/socket.io/socket.io.js"></script>
 	<script>	
-	$(function(){	
-		var socket = io.connect('http://localhost:8080');
+	$(function(){
+		var socket = io.connect('http://cryptic-coast-6018.herokuapp.com:8080');
 		socket.on('question', function(data){	
 			$('#title').text("The poll is closed or not yet opened");
 			console.log(data);
