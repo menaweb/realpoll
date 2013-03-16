@@ -24,6 +24,9 @@
      var correctValue;
      var data;
      var chartData;
+
+     
+     var socket = io.connect('http://localhost:8080');
      google.load('visualization', '1.0', {'packages':['corechart']});
 
       //google.setOnLoadCallback(drawChart);
@@ -59,8 +62,6 @@
     
     // onload
     $(function(){	
-	var socket = io.connect('http://localhost:8080');
-	socket.on();
 	socket.on('answerlist', function(data){
 		addValue(data);
 	});  
@@ -90,6 +91,7 @@
 			}else{
 				
 				clearTimeout( timer );
+				socket.emit('timeIsUp');
 				$('.hide').removeClass('hide'); 
 				$('#countdown').text("Time is up");
 				

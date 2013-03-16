@@ -37,8 +37,14 @@ io.sockets.on('connection', function (socket) {
 	});	
 	
 	socket.on('answer', function (answer){
+		if(question === null){
+			return;
+		}
 		console.log(' received message ', answer);
 		io.sockets.emit('answerlist', answer);
 	});
-	
+
+	socket.on('timeIsUp', function(){
+		question = null;
+	});
 });

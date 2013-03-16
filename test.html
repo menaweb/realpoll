@@ -16,7 +16,13 @@
 	<script>	
 	$(function(){	
 		var socket = io.connect('http://localhost:8080');
-		socket.on('question', function(data){
+		socket.on('question', function(data){	
+			$('#title').text("The poll is closed or not yet opened");
+			if(data === null){
+				$('form').html('<img src="img/lock.png">');
+				return;
+			}
+			
 			$('#title').text(data.title);
 			for(var i in data.options){
 				$('#buttons').append('<div class="control-group"><button type="submit" class="btn input-xxlarge" value="'
@@ -37,7 +43,6 @@
 		     	$('form').html('<img src="img/check.png">'); 
 			});
 		});
-
 	});
 	</script>
 	
