@@ -43,7 +43,7 @@
     
     function addValue(item){
     	options[item.option-1]++;
-	    $('tbody').append('<tr><td>'+item.name+'</td><td class="hide">'+item.option+'<td></tr>');
+	    $('tbody').append('<tr><td>'+item.name+'</td><td class="">'+item.option+'</td></tr>');
 	    drawChart();
     }
     
@@ -52,16 +52,18 @@
     
     // onload
     $(function(){
-	    addValue({name:'miquel',option:1});
-	    addValue({name:'miquel',option:2});
+	    addValue({name:'miquel camps',option:1});
+	    addValue({name:'miquel dfsfdsf',option:2});
 	    addValue({name:'miquel',option:3});
-	    addValue({name:'miquel',option:2});
-	    addValue({name:'miquel',option:3});
-	    addValue({name:'miquel',option:1});
+	    addValue({name:'miqu',option:2});
+	    addValue({name:'miquelsd sdfdsf',option:3});
+	    addValue({name:'miquel ddd',option:1});
+	    addValue({name:'miquel ddd',option:1});
+	    addValue({name:'miquel ddd',option:1});
 	   	    
 	    timer = setInterval(function() {
 			elapsed_seconds = elapsed_seconds - 1;
-			if( elapsed_seconds > -1 ){
+			if( elapsed_seconds > 0 ){
 			
 				if( elapsed_seconds < 11 ) $('#countdown').css('color','red');
 				$('#countdown').text(elapsed_seconds);
@@ -76,10 +78,12 @@
 				
 				$('tbody tr').each(function(){
 					
+					console.log( $(this).find('td:eq(1)').text() );
+					
 					if( $(this).find('td:eq(1)').text() == result ){
-						$(this).css('color','green').css('font-weight','bold');
+						$(this).find('td').addClass('correct');
 					}else{
-						$(this).css('color','red');
+						$(this).find('td').addClass('incorrect');
 					}
 					
 				})
@@ -95,6 +99,14 @@
 </head>
 <body>
 
+<style>
+.table th, .table td{border: 0}
+tbody tr{float:left;margin:15px 0 0 15px}
+td{padding:5px;background:#efefef}
+.correct{background:#33CC00;color:#fff}
+.incorrect{background:#DC3912;color:#fff}
+</style>
+
 <div class="container">
 
 	<div class="row">
@@ -102,11 +114,10 @@
 		
 			<legend>Results</legend>
 
-			<table class="table table-striped">
+			<table class="table">
 				<thead>
 					<tr>
-						<th>Name<th>
-						<th class="hide">Option<th>
+						<th colspan="2">Students<th>
 					</tr>
 				</thead>
 				<tbody>
@@ -116,7 +127,7 @@
 		</div>
 		
 		<div class="span3">
-			<div id="countdown" style="font-size:30px;font-weight:bold;padding:20px 0;">60</div>
+			<div id="countdown" style="margin-left:140px;width:100px;background:#efefef;font-size:30px;font-weight:bold;padding:20px 0;text-align:center">60</div>
 			<div id="chart_div"></div>
 		</div>
 		
