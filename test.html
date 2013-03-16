@@ -18,6 +18,7 @@
 		var socket = io.connect('http://localhost:8080');
 		socket.on('question', function(data){	
 			$('#title').text("The poll is closed or not yet opened");
+			console.log(data);
 			if(data === null){
 				$('form').html('<img src="img/lock.png">');
 				return;

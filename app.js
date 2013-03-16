@@ -5,9 +5,17 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-var question;
+if (process.env.REDISTOGO_URL) {
+	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
+	var redisclient = require("redis").createClient(rtg.port, rtg.hostname);
+	redisclient.auth(rtg.auth.split(":")[1]); 
+
+} else {
+ 	var redisclient = require("redis").createClient();
+}
 
 var port = process.env.PORT || 8080; 
+
 server.listen(port);
 
 app.use("/img", express.static(__dirname + '/img'));
@@ -30,22 +38,31 @@ app.post('/result', function(req, res){
 
 io.sockets.on('connection', function (socket) {
 	
-	socket.emit('question', question);
+		redisclient.get("question", function(error, response) {
+		if(response) {
+			console.log(response);
+			var res = JSON.parse(response);
+			socket.emit('question', res);
+		 }
+		else {
+			socket.emit('question', null);
+		}});
 	
 	socket.on('generateQuestion', function(generatedQuestion){
+		var res = JSON.stringify(generatedQuestion)
+		redisclient.set("question", res);		
 		console.log(generatedQuestion);
-		question = generatedQuestion;
 	});	
 	
 	socket.on('answer', function (answer){
-		if(question === null){
-			return;
-		}
-		console.log(' received message ', answer);
-		io.sockets.emit('answerlist', answer);
+		redisclient.get("question", function(error, response) {
+		if(response) {
+			console.log(' received message ', answer);
+			io.sockets.emit('answerlist', answer);
+		 }});
 	});
 
 	socket.on('timeIsUp', function(){
-		question = null;
+		redisclient.del("question");
 	});
 });
