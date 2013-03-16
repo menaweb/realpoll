@@ -2,19 +2,30 @@ var app = require('express')()
   , server = require('http').createServer(app)
     , io = require('socket.io').listen(server);
 
+var question;
+
 server.listen(8080);
 
 app.get('/', function (req, res) {
 	  res.sendfile(__dirname + '/index.html');
 });
 
+app.get('/dashboard', function (req, res) {
+	  res.sendfile(__dirname + '/dashboard.html');
+});
+
 app.get('/device', function (req, res) {
 	  res.sendfile(__dirname + '/dashboard.html');
 });
 
-
 io.sockets.on('connection', function (socket) {
-	socket.emit('question',generateQuestion());
+	
+	socket.emit('question', question);
+	
+	socket.on('generateQuestion' function(generatedQuestion){
+		question = generatedQuestion;
+	});	
+	
 	socket.on('answer', function (answer){
 		console.log(' received message ', answer);
 		io.sockets.emit('answerlist', answer);

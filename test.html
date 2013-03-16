@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Realpoll</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+	
+	<!-- responsive -->
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+	
+	<!-- node -->
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+	var socket = io.connect('http://localhost:8080');
+	socket.on('answer', function(data){
+		console.log(data);
+	});
+	</script>
+	
+</head>
+<body>
+
+
+<style type="text/css">
+@media only screen and (min-width: 1000px){
+	body{padding-top:200px;}
+	.container{text-align:center;width: 600px}
+}
+</style>
+
+
+<div class="container">
+
+	<div class="row">
+		<div class="span6">
+		
+			<h1>Whats the question?</h1>
+			
+			<br>
+		
+			<form>
+			  <fieldset>
+			 
+			    <div class="control-group">
+			    	<button type="button" class="btn input-xxlarge">Answer 1</button>
+			    </div>
+			    <div class="control-group">
+			    	<button type="button" class="btn input-xxlarge">Answer 2</button>
+			    </div>
+			    <div class="control-group">
+			    	<button type="button" class="btn input-xxlarge">Answer 3</button>
+			    </div>
+			    
+			  </fieldset>
+			</form>
+			
+		</div>
+		
+
+		
+	</div>
+</div>
+
+</body>
+</html>

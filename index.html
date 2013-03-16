@@ -1,25 +1,47 @@
-
+<!DOCTYPE html>
 <html>
-	<head>
-		
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-<script>
-	var socket = io.connect('http://localhost:8080');
-	socket.on('question', function(data){
-		$('#question').append(data.question);
-	});
-	socket.on('answerlist', function(data){
-		console.log(data);
-		
-		$('#userlist').append('<b>' + data.user + '<br>');
-	});
-</script>
-
+<head>
+	<title>Realpoll</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+	
+	<!-- responsive -->
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+	
 </head>
 <body>
-	<h1>Dashboard</h1>
-	<p>Question</p>
-	<p id="question"></p>
-	<h2>User list</h2>
-	  <div id="userlist"></div>
+
+<style type="text/css">
+@media only screen and (min-width: 1000px){
+	body{padding-top:200px;}
+	p{padding:30px 0;font-size:20px}
+	h1,p{color:#fff;text-shadow: 2px 2px #000;}
+	
+	body { 
+		background: url('img/bg.jpg') no-repeat center center fixed;
+		-moz-background-size: cover;
+		-webkit-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+}
+</style>
+
+<div class="container">
+
+	<div class="row">
+		<div class="span7">
+	
+			<h1>Engage your audience</h1>
+			<p>Reallpoll is a service for engagment.</p>
+			<a href="dashboard.htm" class="btn btn-primary btn-large">Take a look</a>
+		
+		</div>
+	</div>
+
+</div>
+
+</body>
+</html>

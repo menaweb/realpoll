@@ -1,41 +1,108 @@
-
+<!DOCTYPE html>
 <html>
-	<head>
-		
+<head>
+	<title>Realpoll</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-<script>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+	
+	<!-- responsive -->
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+	
+	<!-- node -->
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("form").submit(function(e){
+			
+			var title = $('#question').val();
+			var options = $('#questionTextArea').val().split('\n');
+			options = options.filter(function(e){return e}); 
+			var selected = $('.radio :checked').val();
+	
+			var question = {title: title, options: options, correct: selected};
+			console.log(question);
+			e.preventDefault();
 
-	var socket = io.connect('http://localhost:8080');
-	socket.on('answer', function(data){
-		console.log(data);
+			});
+		$('#questionTextArea').bind('input propertychange', function(){
+			var text = $(this).val().split('\n');
+			console.log(text);
+			var options = $('.control-group')[2]; 
+			$('.radio').remove();
+			console.log(options);
+			for(var i in text){
+			if(text[i] === "")
+				continue;
+			$("#options").append('<label class="radio"><input type="radio" name="option" required="required" value="' + i + '">'
+				+ text[i] + '</label>');
+			}
+		});
 	});
-
-	socket.on('question', function(data){
-		$('#question').append(data.question + '<br><br>');
-		for(var i in data.answers){
-			$('#question').append('<br>' + data.answers[i] + '<br>');
-		}
-	});
-
-$(function(){
-	$('#datasend').click( function() {
-		var username = $('#username').val();
-		$('#username').val('');
-		socket.emit('answer', { user: username });
-	});
-
-});
-
-</script>
-
+	</script>
+	
 </head>
 <body>
-	<h1>Dashboard</h1>
-	<p id="question"></p>
-	<div id="conversation"></div>
+<div class="container">
 
-	<label for=username">Introduce your name</label>
-	<input id="username" style="width:200px;" />
-	<input type="button" id="datasend" value="send" />
+	<div class="row">
+		<div class="span6">
+		
+			<form action="/result">
+			  <fieldset>
+			    <legend>Insert a question</legend>
+			    
+			    <div class="control-group">
+			    	<label>Question</label>
+				    <input id="question" name="question" class="input-xxlarge" required="required">
+			    </div>
+			    
+			    <div class="control-group">
+				    <label>Answers</label>
+				    <textarea id="questionTextArea" name="answers" class="input-xxlarge" rows="4" required="required"></textarea>
+			    </div>
+			    
+			    <div id="options" class="control-group">
+				    <label>Valid option</label>
+				    <label class="radio">
+					    <input type="radio" name="option" required="required" value="0"> 1 
+				    </label>
+				    <label class="radio">
+					    <input type="radio" name="option" required="required" value="1"> 2 
+				    </label>
+				    <label class="radio">
+					    <input type="radio" name="option" required="required" value="1"> 3 
+				    </label>
+			    </div>
+			    
+			    <div class="control-group">
+			    	<button type="submit" class="btn btn-primary">Submit</button>
+			    </div>
+			    
+			  </fieldset>
+			</form>
+			
+		</div>
+		
+
+		
+		<div class="span2">
+		
+			<legend>Take the test</legend>
+		
+			<div class="control-group">
+				<label>Copy paste URL</label>
+				<input value="http://sfsdfdsfds">
+			</div>
+			<div class="control-group">
+				<label>Scan QR</label>
+				<img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=http://tudominio.com/qrapp.php">
+			</div>
+		</div>
+		
+	</div>
+</div>
+</body>
+</html>
