@@ -43,7 +43,7 @@
     
     function addValue(item){
     	options[item.option-1]++;
-	    $('tbody').append('<tr><td>'+item.name+'<td><td class="hide">'+item.option+'<td></tr>');
+	    $('tbody').append('<tr><td>'+item.name+'</td><td class="hide">'+item.option+'<td></tr>');
 	    drawChart();
     }
     
@@ -54,6 +54,10 @@
     $(function(){
 	    addValue({name:'miquel',option:1});
 	    addValue({name:'miquel',option:2});
+	    addValue({name:'miquel',option:3});
+	    addValue({name:'miquel',option:2});
+	    addValue({name:'miquel',option:3});
+	    addValue({name:'miquel',option:1});
 	   	    
 	    timer = setInterval(function() {
 			elapsed_seconds = elapsed_seconds - 1;
@@ -66,6 +70,22 @@
 				clearTimeout( timer );
 				$('.hide').removeClass('hide'); 
 				$('#countdown').text("Time is up");
+				
+				
+				result = 1;
+				
+				$('tbody tr').each(function(){
+					
+					if( $(this).find('td:eq(1)').text() == result ){
+						$(this).css('color','green').css('font-weight','bold');
+					}else{
+						$(this).css('color','red');
+					}
+					
+				})
+				
+				
+				
 				
 			}
 		}, 1000);
