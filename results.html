@@ -9,6 +9,7 @@
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 	
+	<script src="/socket.io/socket.io.js"></script>
 	<!-- responsive -->
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
 	
@@ -51,10 +52,12 @@
 
     
     // onload
-    $(function(){
-	    addValue({name:'miquel',option:1});
-	    addValue({name:'miquel',option:2});
-	   	    
+    $(function(){	
+	var socket = io.connect('http://localhost:8080');
+	socket.on('answerlist', function(data){
+		addValue(data);
+	});  
+		    
 	    timer = setInterval(function() {
 			elapsed_seconds = elapsed_seconds - 1;
 			if( elapsed_seconds > -1 ){

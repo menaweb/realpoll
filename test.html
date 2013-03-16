@@ -28,10 +28,10 @@
 			
 			$('button').bind('click', function() {
 			var username = $("#username").val();
-			var optionSelected = $(this).attr("value");
-			var answer = {user: username, answer: optionSelected};
+			var optionSelected = parseInt($(this).attr("value")) + 1;
+			var answer = {name: username, option: optionSelected};
 			console.log(answer)
-			socket.emit('sendAnswer', answer);
+			socket.emit('answer', answer);
 		     
 			});
 		});
