@@ -28,6 +28,9 @@
 			
 			$('button').bind('click', function() {
 			var username = $("#username").val();
+			if(username === "")
+				return;
+
 			var optionSelected = parseInt($(this).attr("value")) + 1;
 			var answer = {name: username, option: optionSelected};
 			console.log(answer)

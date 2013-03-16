@@ -1,10 +1,15 @@
-var app = require('express')()
-  , server = require('http').createServer(app)
-    , io = require('socket.io').listen(server);
+var express = require('express')
+  , http = require('http');
+
+var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 var question;
 
 server.listen(8080);
+
+app.use("/img", express.static(__dirname + '/img'));
 
 app.get('/', function (req, res) {
 	  res.sendfile(__dirname + '/index.html');
