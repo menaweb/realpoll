@@ -64,7 +64,8 @@
 			}else{
 				
 				clearTimeout( timer );
-				$('.hide').show();
+				$('.hide').removeClass('hide'); 
+				$('#countdown').text("Time is up");
 				
 			}
 		}, 1000);
