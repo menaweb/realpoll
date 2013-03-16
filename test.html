@@ -3,7 +3,8 @@
 <head>
 	<title>Realpoll</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 	
@@ -12,10 +13,19 @@
 	
 	<!-- node -->
 	<script src="/socket.io/socket.io.js"></script>
-	<script>
-	var socket = io.connect('http://localhost:8080');
-	socket.on('answer', function(data){
-		console.log(data);
+	<script>	
+	$(function(){	
+		var socket = io.connect('http://localhost:8080');
+		socket.on('question', function(data){
+			$('#title').text(data.title);
+			console.log(data);
+			for(var i in data.options){
+				$('#buttons').append('<div class="control-group"><button type="submit" class="btn input-xxlarge">'
+						+ data.options[i] 
+						+ '</button></div>');
+			}
+		});
+
 	});
 	</script>
 	
@@ -36,12 +46,12 @@
 	<div class="row">
 		<div class="span6">
 		
-			<h1>Whats the question?</h1>
+			<h1 id="title">Whats the question?</h1>
 			
 			<br>
 		
 			<form>
-			  <fieldset>
+			  <fieldset id="buttons">
 			  
 			  	<div class="control-group">
 			  		<label>Your name</label>
@@ -51,17 +61,7 @@
 			  	<div class="control-group">
 			  		<label>Your answer</label>
 			  	</div>
-			 
-			    <div class="control-group">
-			    	<button type="submit" class="btn input-xxlarge">Answer 1</button>
-			    </div>
-			    <div class="control-group">
-			    	<button type="submit" class="btn input-xxlarge">Answer 2</button>
-			    </div>
-			    <div class="control-group">
-			    	<button type="submit" class="btn input-xxlarge">Answer 3</button>
-			    </div>
-			    
+						    
 			  </fieldset>
 			</form>
 			

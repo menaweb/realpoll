@@ -33,8 +33,3 @@ io.sockets.on('connection', function (socket) {
 	});
 	
 });
-
-var generateQuestion = function()
-{
-	return {question: "Who is Miquel Camps", answers: ["A fisherman", "A politician", "A startup person"], correctAnswer:2};
-}
