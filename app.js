@@ -14,15 +14,16 @@ app.get('/dashboard', function (req, res) {
 	  res.sendfile(__dirname + '/dashboard.html');
 });
 
-app.get('/device', function (req, res) {
-	  res.sendfile(__dirname + '/dashboard.html');
+app.get('/test', function (req, res) {
+	  res.sendfile(__dirname + '/test.html');
 });
 
 io.sockets.on('connection', function (socket) {
 	
 	socket.emit('question', question);
 	
-	socket.on('generateQuestion' function(generatedQuestion){
+	socket.on('generateQuestion', function(generatedQuestion){
+		console.log(generatedQuestion);
 		question = generatedQuestion;
 	});	
 	

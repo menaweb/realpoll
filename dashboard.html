@@ -14,6 +14,8 @@
 	<!-- node -->
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
+	var sock = io.connect('http://localhost:8080');
+	console.log(sock);
 	$(function(){
 		$("form").submit(function(e){
 			
@@ -24,9 +26,11 @@
 	
 			var question = {title: title, options: options, correct: selected};
 			console.log(question);
+	
+			sock.emit('generateQuestion', question);
 			e.preventDefault();
+		});
 
-			});
 		$('#questionTextArea').bind('input propertychange', function(){
 			var text = $(this).val().split('\n');
 			console.log(text);
@@ -66,15 +70,6 @@
 			    
 			    <div id="options" class="control-group">
 				    <label>Valid option</label>
-				    <label class="radio">
-					    <input type="radio" name="option" required="required" value="0"> 1 
-				    </label>
-				    <label class="radio">
-					    <input type="radio" name="option" required="required" value="1"> 2 
-				    </label>
-				    <label class="radio">
-					    <input type="radio" name="option" required="required" value="1"> 3 
-				    </label>
 			    </div>
 			    
 			    <div class="control-group">
