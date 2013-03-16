@@ -35,7 +35,7 @@
 			var answer = {name: username, option: optionSelected};
 			console.log(answer)
 			socket.emit('answer', answer);
-		     
+		     	$('form').html('<img src="img/check.png">'); 
 			});
 		});
 
