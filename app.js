@@ -5,6 +5,11 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+
 if (process.env.REDISTOGO_URL) {
 	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
 	var redisclient = require("redis").createClient(rtg.port, rtg.hostname);

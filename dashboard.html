@@ -12,9 +12,9 @@
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
 	
 	<!-- node -->
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://cryptic-coast-6018.herokuapp.com/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
-	var sock = io.connect('http://cryptic-coast-6018.herokuapp.com:8080');
+	var sock = io.connect('http://cryptic-coast-6018.herokuapp.com:80/');
 	console.log(sock);
 	$(function(){
 		$("form").submit(function(e){

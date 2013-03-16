@@ -9,7 +9,7 @@
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 	
-	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://cryptic-coast-6018.herokuapp.com/socket.io/socket.io.js"></script>
 	<!-- responsive -->
 	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
 	
@@ -24,9 +24,8 @@
      var correctValue;
      var data;
      var chartData;
-
      
-     var socket = io.connect('http://cryptic-coast-6018.herokuapp.com:8080');
+     var socket = io.connect('http://cryptic-coast-6018.herokuapp.com/');
      google.load('visualization', '1.0', {'packages':['corechart']});
 
       //google.setOnLoadCallback(drawChart);
