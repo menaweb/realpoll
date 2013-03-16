@@ -14,11 +14,15 @@ app.get('/device', function (req, res) {
 
 
 io.sockets.on('connection', function (socket) {
-
-	socket.emit('answer', { hello: 'world' });
-	socket.on('message', function (from){
-		console.log(' received message ', from);
-		io.sockets.emit('answer', from);
+	socket.emit('question',generateQuestion());
+	socket.on('answer', function (answer){
+		console.log(' received message ', answer);
+		io.sockets.emit('answerlist', answer);
 	});
 	
 });
+
+var generateQuestion = function()
+{
+	return {question: "Who is Miquel Camps", answers: ["A fisherman", "A politician", "A startup person"], correctAnswer:2};
+}
