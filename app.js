@@ -7,7 +7,7 @@ var io = require('socket.io').listen(server);
 
 var question;
 
-var port = process.env.PORT | 8080; 
+var port = process.env.PORT || 8080; 
 server.listen(port);
 
 app.use("/img", express.static(__dirname + '/img'));
