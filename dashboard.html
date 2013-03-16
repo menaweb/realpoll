@@ -28,7 +28,6 @@
 			console.log(question);
 	
 			sock.emit('generateQuestion', question);
-			e.preventDefault();
 		});
 
 		$('#questionTextArea').bind('input propertychange', function(){
@@ -54,7 +53,7 @@
 	<div class="row">
 		<div class="span6">
 		
-			<form action="/result">
+			<form action="/result" method="POST">
 			  <fieldset>
 			    <legend>Insert a question</legend>
 			    

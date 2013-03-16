@@ -18,6 +18,10 @@ app.get('/test', function (req, res) {
 	  res.sendfile(__dirname + '/test.html');
 });
 
+app.post('/result', function(req, res){
+	  res.sendfile(__dirname + '/results.html');
+});
+
 io.sockets.on('connection', function (socket) {
 	
 	socket.emit('question', question);
