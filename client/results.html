@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Realpoll</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<!-- bootstrap -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+	
+	<script src="http://cryptic-coast-6018.herokuapp.com/socket.io/socket.io.js"></script>
+	<!-- responsive -->
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css" rel="stylesheet">
+	
+	<!-- charts -->
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="../scripts/results.js"></script>
+	
+</head>
+<body>
+
+<style>
+.table th, .table td{border: 0}
+tbody tr{float:left;margin:15px 0 0 15px}
+td{padding:5px;background:#efefef}
+.correct{background:#33CC00;color:#fff}
+.incorrect{background:#DC3912;color:#fff}
+</style>
+
+<div class="container">
+
+	<div class="row">
+		<div class="span6">
+			<h1 id="question">Question</h1>
+			<legend>Possible answers</legend>
+			<ul id="answers">
+			</ul>
+			<legend>Results</legend>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th colspan="2">Students<th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+  			</table>
+			
+		</div>
+		
+		<div class="span3">
+			<div id="countdown" style="margin-left:140px;width:100px;background:#efefef;font-size:30px;font-weight:bold;padding:20px 0;text-align:center">60</div>
+			<div id="chart_div"></div>
+		</div>
+		
+	</div>
+</div>
+
+</body>
+</html>	
